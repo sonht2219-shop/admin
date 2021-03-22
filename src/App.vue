@@ -4,6 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
+      <Test />
     <router-view/>
   </div>
 </template>
@@ -13,7 +14,6 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
@@ -30,3 +30,13 @@
   }
 }
 </style>
+<script>
+import Test from "@/Test";
+import CommonStatus from "@/common/enums/statues/common";
+export default {
+    components: {Test},
+    created() {
+        console.log(CommonStatus.getDescription(1));
+    }
+}
+</script>
