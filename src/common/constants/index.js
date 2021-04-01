@@ -1,0 +1,5 @@
+const AUTHENTICATION_KEY = 'cbhsdbvskjdbnvsjbvjkskd';
+const FORMAT_DATE = 'DD-MM-YYYY';
+const FORMAT_DATE_TIME = `HH:mm:ss ${FORMAT_DATE}`;
+const WIDTH_MOBILE = 768;
+export { AUTHENTICATION_KEY, FORMAT_DATE, FORMAT_DATE_TIME, WIDTH_MOBILE }

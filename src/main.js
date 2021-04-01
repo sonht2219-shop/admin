@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import i18n from '@/common/langs'
 import '@/common/libs'
+import '@/assets/css/style.less'
 
 Vue.config.productionTip = false
 new Vue({
