@@ -4,7 +4,9 @@
         <a-layout>
             <Header />
             <a-layout-content>
-                <router-view />
+                <content-page>
+                    <router-view />
+                </content-page>
             </a-layout-content>
             <Footer />
         </a-layout>
@@ -15,9 +17,10 @@
 import Sidebar from "@/layouts/common/components/Sidebar/index";
 import Header from "@/layouts/common/components/Header/index";
 import Footer from "@/layouts/common/components/Footer/index";
+import ContentPage from "@/layouts/common/components/Content/index";
 export default {
 name: "CommonLayout",
-    components: {Footer, Sidebar, Header}
+    components: {ContentPage, Footer, Sidebar, Header}
 }
 </script>
 

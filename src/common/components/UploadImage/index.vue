@@ -2,6 +2,7 @@
     <div>
         <a-upload
             :action="action"
+            name="image"
             list-type="picture-card"
             :file-list="fileList"
             :headers="headers"
@@ -26,7 +27,8 @@
 </template>
 
 <script>
-import {getBase64} from "@/common/services/helper";
+import {buildRequestHeaders, getBase64} from "@/common/services/helper";
+import {apiUpload, domain} from "@/common/environtments";
 
 export default {
     name: "UploadImage",
@@ -41,9 +43,9 @@ export default {
     data: () => ({
         fileList: [],
         headers: {
-
+            ...buildRequestHeaders(false)
         },
-        action: `${process.env.VUE_APP_BASE_API}v1/upload/by-file`,
+        action: apiUpload,
         previewVisible: false,
         previewImage: ''
     }),
@@ -56,7 +58,6 @@ export default {
             this.previewVisible = true;
         },
         handleChange(changed) {
-            console.log(changed);
             const {fileList, file} = changed;
             this.fileList = fileList;
             if (['done', 'removed'].includes(file.status)) {
@@ -69,7 +70,7 @@ export default {
             this.$emit('change', result);
         },
         pathToUrl(path) {
-            return `${process.env.VUE_APP_BASE_URL}upload/${path}`;
+            return `${domain}upload/${path}`;
         }
     },
     watch: {

@@ -3,8 +3,8 @@
         <a-row :gutter="[8,8]">
             <a-col :xs="24">
                 <a-form-item>
-                    <ValidationProvider name="Tài khoản" rules="required" v-slot="{ errors }">
-                        <a-input v-model="form.username" placeholder="Nhập tài khoản">
+                    <ValidationProvider name="Email" rules="required" v-slot="{ errors }">
+                        <a-input v-model="form.email" placeholder="Nhập Email">
                             <a-icon slot="prefix" type="user" :style="{ color: '#1890ff' }"/>
                         </a-input>
                         <validate-message v-if="errors.length">{{ errors[0] }}</validate-message>
@@ -42,7 +42,7 @@ import { createNamespacedHelpers } from 'vuex';
 import {LOGIN} from "@/modules/auth/store/action-type";
 const { mapActions }  = createNamespacedHelpers('authStore');
 const form = {
-    username: undefined,
+    email: undefined,
     password: undefined
 }
 export default {
@@ -62,7 +62,7 @@ export default {
             this.form = { ...form };
         },
         submit() {
-            this.$refs.form.validate(async valid => {
+            this.$refs.form.validate().then(async valid => {
                 if (!valid) return;
                 try {
                     await this.login(this.form);

@@ -14,19 +14,21 @@
                 theme="dark"
             >
                 <template v-for="item in routes">
-                    <a-menu-item :key="item.name" v-if="!item.children">
-                        <router-link :to="{ name: item.name }">
-                            <a-icon :type="item.icon" />
-                            <span>{{ item.meta.title }}</span>
-                        </router-link>
-                    </a-menu-item>
-                    <a-menu-item :key="item.name" v-else-if="isOnlyShowParent(item)">
-                        <router-link :to="{ name: $get(item, 'children[0].name') }">
-                            <a-icon :type="item.icon" />
-                            <span>{{ item.meta.title }}</span>
-                        </router-link>
-                    </a-menu-item>
-                    <sub-menu v-else :key="item.name" :menu-info="item"/>
+                    <template v-if="!$get(item, 'meta.hidden')">
+                        <a-menu-item :key="item.name" v-if="!item.children">
+                            <router-link :to="{ name: item.name }">
+                                <a-icon :type="item.icon" />
+                                <span>{{ item.meta.title }}</span>
+                            </router-link>
+                        </a-menu-item>
+                        <a-menu-item :key="item.name" v-else-if="isOnlyShowParent(item)">
+                            <router-link :to="{ name: $get(item, 'children[0].name') }">
+                                <a-icon :type="item.meta.icon" />
+                                <span>{{ item.meta.title }}</span>
+                            </router-link>
+                        </a-menu-item>
+                        <sub-menu v-else :key="item.name" :menu-info="item"/>
+                    </template>
                 </template>
             </a-menu>
         </div>
@@ -37,123 +39,13 @@
 import SubMenu from "@/layouts/common/components/Sidebar/components/SubMenu";
 import { createNamespacedHelpers } from 'vuex';
 import Logo from "@/layouts/common/components/Sidebar/components/Logo";
+import {routes} from "@/router";
 const { mapState } = createNamespacedHelpers('layoutStore');
 export default {
     name: "ContentSidebar",
     components: {Logo, SubMenu},
     data: () => ({
-        routes: [
-            {
-                path: '/user',
-                name: 'user',
-                meta: {
-                    icon: 'user',
-                    title: 'Quản lý user'
-                },
-                children: [
-                    {
-                        path: 'create',
-                        name: 'createUser',
-                        meta: {
-                            icon: 'user',
-                            title: 'Thêm user'
-                        }
-                    },
-                    {
-                        path: 'update',
-                        name: 'updateUser',
-                        meta: {
-                            icon: 'user',
-                            title: 'Sửa user'
-                        }
-                    },
-                    {
-                        path: 'list',
-                        name: 'listUser',
-                        meta: {
-                            icon: 'user',
-                            title: 'DS user'
-                        },
-                        children: [
-                            {
-                                path: 'list',
-                                name: 'listUsers',
-                                meta: {
-                                    icon: 'user',
-                                    title: 'Xóa user'
-                                },
-                            }
-                        ]
-                    },
-                ]
-            },
-            {
-                path: '/user',
-                name: 'user1',
-                meta: {
-                    icon: 'user',
-                    title: 'Trang chủ',
-                    onlyShowParent: true
-                },
-                children: [
-                    {
-                        path: '',
-                        name: 'createUser1',
-                        meta: {
-                            icon: 'user',
-                            title: 'Thêm user'
-                        }
-                    }
-                ]
-            },
-            {
-                path: '/user',
-                name: 'user2',
-                meta: {
-                    icon: 'user',
-                    title: 'Trang chủ 2',
-                },
-                children: [
-                    {
-                        path: 'user2',
-                        name: 'createUser2',
-                        meta: {
-                            icon: 'user',
-                            title: 'Thêm user 2',
-                            onlyShowParent: true
-                        },
-                        children: [
-                            {
-                                path: '',
-                                name: 'createUser21',
-                                meta: {
-                                    icon: 'user',
-                                    title: 'Thêm user 21'
-                                },
-                            }
-                        ]
-                    },
-                    {
-                        path: '',
-                        name: 'createUser3',
-                        meta: {
-                            icon: 'user',
-                            title: 'Thêm user 3'
-                        },
-                        children: [
-                            {
-                                path: '',
-                                name: 'createUser31',
-                                meta: {
-                                    icon: 'user',
-                                    title: 'Thêm user 31'
-                                },
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+        routes: routes
     }),
     computed: {
         ...mapState([

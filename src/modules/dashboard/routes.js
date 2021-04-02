@@ -4,7 +4,7 @@ const dashBoardRoutes = [
         path: '/dashboard',
         component: CommonLayout,
         name: 'home',
-        meta: { title: 'Trang chủ', icon: 'dashboard' },
+        meta: { title: 'Trang chủ', icon: 'dashboard', onlyShowParent: true },
         children: [
             {
                 path: '',

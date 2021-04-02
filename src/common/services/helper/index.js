@@ -12,11 +12,16 @@ const getBase64 = (file) => {
         reader.onerror = error => reject(error);
     });
 }
-const buildRequestHeaders = () => ({
-    'Authorization': `Bearer ${appLocalStorage.getItem(AUTHENTICATION_KEY)}`,
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-})
+const buildRequestHeaders = (contentType = 'application/json') => {
+    const data = {
+        'Authorization': `Bearer ${appLocalStorage.getItem(AUTHENTICATION_KEY)}`,
+        'Accept': 'application/json',
+    }
+    if (contentType) {
+        data['Content-Type'] = contentType;
+    }
+    return data;
+}
 const getProp = (obj, path, defaultVal) => get(obj, path, defaultVal);
 export {
     freeze,

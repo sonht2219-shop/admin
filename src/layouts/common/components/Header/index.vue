@@ -70,7 +70,8 @@ export default {
         height: 100%;
         padding: 0 16px;
         background: #fff;
-        box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+        box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+        -webkit-box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
         &>* {
             height: 100%;
